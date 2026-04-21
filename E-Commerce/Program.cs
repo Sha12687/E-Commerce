@@ -1,4 +1,6 @@
 
+using ECommerce.Business.Repository;
+using ECommerce.Business.Service;
 using ECommerce.Data2.Models;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyContext>(dbContextOptions => dbContextOptions.UseSqlServer(
 builder.Configuration.GetConnectionString("Myconnection")));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

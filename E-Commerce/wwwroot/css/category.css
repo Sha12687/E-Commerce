@@ -1,0 +1,24 @@
+﻿.page-title {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card-custom {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.table thead {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-custom {
+    border-radius: 20px;
+    padding: 6px 18px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
