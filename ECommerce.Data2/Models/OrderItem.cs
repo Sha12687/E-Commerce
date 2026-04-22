@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace E_Commerce.Models
+namespace E_Commerce.Data2.Models
 {
     public class OrderItem
     {
@@ -18,8 +18,8 @@ namespace E_Commerce.Models
 
         // Navigation
         [ForeignKey("OrderId")]
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }

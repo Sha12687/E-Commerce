@@ -1,0 +1,41 @@
+﻿@model E_Commerce.View_Model.RegisterVM
+@{
+    Layout = "_AuthLayout";
+}
+<div class="container mt-5 text-center w-50">
+    <h1>Registration</h1>
+
+    <div class="row mt-4">
+        
+        <!-- LEFT SIDE -->
+        <div class="">
+            <h4>Register account to log in.</h4>
+            <hr />
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="text-danger">@ViewBag.Error</div>
+            }
+
+
+<form method="post">
+                <div class="form-group mb-3">
+    <input asp-for="Email" class="form-control" />
+    </div>
+                <div class="form-group mb-3">
+                    <input asp-for="FullName" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+    <input asp-for="Password" type="password" class="form-control" />
+    </div>
+                <div class="form-group mb-3">
+    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+    </div>
+                <button type="submit" class="btn btn-primary w-10">Register</button>
+</form>
+</div>
+</div>
+</div>

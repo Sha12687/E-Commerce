@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace E_Commerce.Models
+namespace E_Commerce.Data2.Models
 {
     public class Payment
     {
@@ -13,16 +13,16 @@ namespace E_Commerce.Models
 
         [Required]
         [MaxLength(50)]
-        public string PaymentMethod { get; set; }  // UPI, Card, COD
+        public string? PaymentMethod { get; set; }  // UPI, Card, COD
 
         [Required]
         [MaxLength(30)]
-        public string PaymentStatus { get; set; }  // Pending, Success, Failed
+        public string? PaymentStatus { get; set; }  // Pending, Success, Failed
 
         [Required]
         public DateTime PaidAt { get; set; }
 
         [ForeignKey("OrderId")]
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
     }
 }

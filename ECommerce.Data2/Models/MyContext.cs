@@ -1,15 +1,17 @@
-﻿using E_Commerce.Models;
+﻿using E_Commerce.Data2.Models;
+using E_Commerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Data2.Models
 {
-    public class MyContext : DbContext
+    public class MyContext : IdentityDbContext<ApplicationUser>
     {
-        public MyContext(DbContextOptions<MyContext> dbContextOptions) : base(dbContextOptions) {
-
+        public MyContext(DbContextOptions<MyContext> options) : base(options)
+        {
         }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+
+      
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -23,6 +25,7 @@ namespace ECommerce.Data2.Models
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>()
                 .Property(p => p.Price)
                 .HasPrecision(18, 2);

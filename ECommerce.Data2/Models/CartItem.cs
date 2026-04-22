@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_Commerce.Data2.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace E_Commerce.Models
+namespace E_Commerce.Data2.Models
 {
     public class CartItem
     {
@@ -17,10 +18,10 @@ namespace E_Commerce.Models
         // Navigation
         [ForeignKey("CartId")]
        
-        public Cart Cart { get; set; }
+        public Cart? Cart { get; set; }
         
 
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }
