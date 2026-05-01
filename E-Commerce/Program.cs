@@ -2,6 +2,7 @@ using E_Commerce.Model;
 using ECommerce.Business.Repository;
 using ECommerce.Business.Service;
 using ECommerce.Data2.Models;
+using ECommerce.Data2.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +20,11 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<MyContext>()
 .AddDefaultTokenProviders();
 
+
 // ✅ Cookie configuration (important for custom login)
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login";
+    options.LoginPath = "/Account/Login";   // ✅ correct
     options.AccessDeniedPath = "/Account/Login";
 });
 
@@ -35,7 +37,10 @@ builder.Services.AddControllersWithViews();
 // ✅ Your custom services
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 var app = builder.Build();
 
 // ✅ Error handling
@@ -61,11 +66,21 @@ using (var scope = app.Services.CreateScope())
     await DataSeeder.SeedRolesAndAdmin(services);
 }
 
-// ✅ Routing (Controller-based)
+// ✅ Admin shortcut (/Admin)
+app.MapControllerRoute(
+    name: "admin_shortcut",
+    pattern: "Admin",
+    defaults: new {controller = "Admin", action = "Index" });
+
+// ✅ Area routing
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+// ✅ Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 // ❌ REMOVE this (causes Identity UI conflicts)
 // app.MapRazorPages();
 

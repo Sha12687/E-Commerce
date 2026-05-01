@@ -1,8 +1,10 @@
 ﻿using E_Commerce.View_Model;
+using ECommerce.Business.Models;
+using ECommerce.Business.Service;
 using ECommerce.Data2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
+
 namespace E_Commerce.Controllers
 {
    
@@ -11,12 +13,16 @@ namespace E_Commerce.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IAdminService _adminService;    
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
-                                 UserManager<ApplicationUser> userManager)
+                                 UserManager<ApplicationUser> userManager,
+                                 IAdminService adminService
+                                  )
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _adminService = adminService;
         }
 
         // GET: /Account/Login
@@ -27,13 +33,22 @@ namespace E_Commerce.Controllers
 
         // POST: /Account/Login
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(string email, string password, string returnUrl = null)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+                if (result.Succeeded)
+                {if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                
 
-            if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
-
+                        TempData["UserName"] = user.FullName;
+                        return RedirectToAction("Index", "Admin", new { id = user.Id });
+                    }
+                }
+            }
             ViewBag.Error = "Invalid login";
             return View();
         }

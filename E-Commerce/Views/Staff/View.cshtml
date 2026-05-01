@@ -1,0 +1,117 @@
+﻿@model ECommerce.Business.Models.StaffVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow p-4">
+                <h3 class="text-center mb-4">Your Detail</h3>
+                <!-- Image -->
+                    <div class="text-center mb-3">
+                        <img id="previewImage"
+                             src="/images/person-question-mark.svg"
+                             class="rounded-circle border"
+                             width="120" height="120"
+                             style="object-fit:cover;" />
+
+                        <input asp-for="ExistingImage" type="file" class="form-control mt-2"
+                               onchange="previewFile(event)" />
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label>Full Name</label>
+                            <input readonly asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Email</label>
+                            <input readonly asp-for="Email" class="form-control" />
+                        </div>
+
+                      
+
+                        <div class="col-md-6 mb-3">
+                            <label>DOB</label>
+                            <input asp-for="DOB" type="date" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Street</label>
+                            <input readonly asp-for="Street" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>City</label>
+                            <input readonly asp-for="City" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>State</label>
+                            <input asp-for="State" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Country</label>
+                            <input readonly asp-for="Country" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Pin Code</label>
+                            <input readonly asp-for="PinCode" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Phone Number</label>
+                            <input readonly asp-for="PhoneNumber" class="form-control" />
+                        </div>
+
+                    </div>
+
+                  
+
+               
+            </div>
+
+        </div>
+        <div class="row text-center mt-lg-3">
+            <h3>@Model.FullName Feedback's</h3>
+         </div>
+        <table class="table">
+         
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">Message</th>
+                    <th scope="col" class="text-center">Date</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.FeedbackVMs != null)
+                {
+                    @foreach (var faq in Model.FeedbackVMs)
+                    {
+                        <tr>
+                            <td class="text-center">@faq.Id</td>
+                            <td class="text-center">@faq.Question</td>
+                            <td class="text-center">@faq.CreationDate.ToShortDateString() </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+            </table>
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewFile(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('previewImage').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

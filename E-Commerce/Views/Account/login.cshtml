@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<input type="hidden" name="returnUrl" value="@Context.Request.Query["ReturnUrl"]" />
 
 <div class="container mt-5 text-center w-50">
     <h1>Log in</h1>

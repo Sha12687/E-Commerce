@@ -34,8 +34,4 @@
     <ProjectReference Include="..\ECommerce.Data2\ECommerce.Data2.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Admin\" />
-  </ItemGroup>
-
 </Project>

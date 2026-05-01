@@ -1,0 +1,97 @@
+﻿@model ECommerce.Business.Models.StaffVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow p-4">
+                <h3 class="text-center mb-4">Create Staff</h3>
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                    <!-- Image -->
+                    <div class="text-center mb-3">
+                        <img id="previewImage"
+                             src="/images/person-question-mark.svg"
+                             class="rounded-circle border"
+                             width="120" height="120"
+                             style="object-fit:cover;" />
+
+                        <input asp-for="ExistingImage" type="file" class="form-control mt-2"
+                               onchange="previewFile(event)" />
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label>Full Name</label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Email</label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Password</label>
+                            <input asp-for="Password" type="password" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>DOB</label>
+                            <input asp-for="DOB" type="date" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Street</label>
+                            <input asp-for="Street" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>City</label>
+                            <input asp-for="City" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>State</label>
+                            <input asp-for="State" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Country</label>
+                            <input asp-for="Country" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Pin Code</label>
+                            <input asp-for="PinCode" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-success">Create</button>
+                        <a asp-action="StaffList" class="btn btn-secondary">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewFile(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('previewImage').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

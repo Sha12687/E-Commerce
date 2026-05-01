@@ -7,11 +7,14 @@ namespace ECommerce.Data2.Models
 {
     public class MyContext : IdentityDbContext<ApplicationUser>
     {
+      
+
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
         }
 
-      
+        
+
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

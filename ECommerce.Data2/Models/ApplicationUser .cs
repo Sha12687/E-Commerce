@@ -12,6 +12,8 @@ namespace ECommerce.Data2.Models
     public class ApplicationUser : IdentityUser
     {
         public string? FullName { get; set; }
+        public DateTime? DOB { get; set; }
+        public string? ProfileImage { get; set; }
         public ICollection<Address>? Addresses { get; set; }
         public ICollection<Cart>? Carts { get; set; }
         public ICollection<Order>? Orders { get; set; }

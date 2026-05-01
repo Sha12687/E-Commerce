@@ -1,0 +1,40 @@
+﻿@model ECommerce.Business.Models.AdminProfileVM
+
+
+<div class="d-flex justify-content-center align-items-center" style="height:80vh;">
+    <div class="text-center">
+    <form asp-action="Index" enctype="multipart/form-data">
+            <div class="mb-3">
+                <img src="@(Model?.ExistingImage ?? "/images/person-question-mark.svg")"
+                     class="rounded-circle border shadow"
+                     width="250" height="250"
+                     onerror="this.onerror=null; this.src='/images/person-question-mark.svg';">
+
+                <h3 class="mt-3">
+                    Welcome Mr. @(TempData["UserName"] ?? "Guest")
+                </h3>
+
+      
+            </div>
+            <div class="mb-2">
+                <strong>Name :</strong> @Model.FullName
+            </div>
+
+            <div class="mb-2">
+                <strong>Email :</strong> @Model.Email
+            </div>
+
+            <div class="mb-2">
+                <strong>DOB :</strong> @Model.DOB?.ToString("yyyy-MM-dd")
+            </div>
+
+            <div class="mb-2">
+                <strong>Street :</strong> @Model.Street
+            </div>
+
+            <div class="mb-2">
+                <strong>City :</strong> @Model.City
+            </div>
+        </form>
+    </div>
+</div>

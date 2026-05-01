@@ -1,0 +1,102 @@
+﻿@model ECommerce.Business.Models.AdminProfileVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow-lg p-4 rounded-4">
+                <h3 class="text-center mb-4">Edit Profile</h3>
+
+                <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+
+                    <!-- Profile Image -->
+                    <div class="text-center mb-4">
+                        <img id="previewImage"
+                             src="@(Model?.ExistingImage ?? "/images/person-question-mark.svg")"
+                             class="rounded-circle border shadow"
+                             width="150" height="150"
+                             style="object-fit:cover;"
+                             onerror="this.onerror=null; this.src='/images/person-question-mark.svg';" />
+
+                        <div class="mt-3">
+                            <input asp-for="Image" type="file" class="form-control"
+                                   onchange="previewFile(event)" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Full Name -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <!-- Email (readonly) -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                        </div>
+
+                        <!-- DOB -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Date of Birth</label>
+                            <input asp-for="DOB" type="date" class="form-control" />
+                        </div>
+
+                        <!-- Street -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Street</label>
+                            <input asp-for="Street" class="form-control" />
+                        </div>
+
+                        <!-- City -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">City</label>
+                            <input asp-for="City" class="form-control" />
+                        </div>
+
+                        <!-- State -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">State</label>
+                            <input asp-for="State" class="form-control" />
+                        </div>
+
+                        <!-- Country -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Country</label>
+                            <input asp-for="Country" class="form-control" />
+                        </div>
+
+                        <!-- PinCode -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Pin Code</label>
+                            <input asp-for="PinCode" class="form-control" />
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                        <a asp-action="Index" class="btn btn-secondary px-4 ms-2">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Image Preview Script -->
+<script>
+    function previewFile(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('previewImage');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
